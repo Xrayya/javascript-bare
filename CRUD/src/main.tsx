@@ -7,6 +7,7 @@ import {
   createBrowserRouter,
 } from 'react-router-dom';
 import Dashboard from './pages/Dashboard';
+import AddMahasiswa from './pages/AddMahasiswa';
 
 const router = createBrowserRouter([
   {
@@ -14,8 +15,12 @@ const router = createBrowserRouter([
     element: <Navigate to='/dashboard' />,
   },
   {
-    path: '/dashboard',
+    path: 'dashboard',
     element: <Dashboard />,
+  },
+  {
+    path: 'add-mahasiswa',
+    element: <AddMahasiswa />,
   },
 ]);
 

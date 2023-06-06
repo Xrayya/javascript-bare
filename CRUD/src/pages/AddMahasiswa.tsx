@@ -1,21 +1,28 @@
-import React, { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Button, Card, Container, Form, Row } from 'react-bootstrap';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useIsMount } from '../hooks/customHooks';
 
-type Props = {
-  onClick: () => void
-}
-
-const AddMahasiswa: React.FC<Props> = () => {
+const AddMahasiswa = () => {
   interface Mahasiswa {
     firstName: string | undefined;
     lastName: string | undefined;
     totalCredit: number | undefined;
   }
-  const [mahasiswas, setMahasiswas] = useState<Mahasiswa[]>([]);
+
+  const location = useLocation();
+
+  const [mahasiswas, setMahasiswas] = useState<Mahasiswa[]>(
+    location.state?.mahasiswas ?? []
+  );
 
   const firstNameRef = useRef<HTMLInputElement>(null);
   const lastNameRef = useRef<HTMLInputElement>(null);
   const totalCreditRef = useRef<HTMLInputElement>(null);
+
+  const navigate = useNavigate();
+
+  const isMount = useIsMount();
 
   const handleAddMahasiswas = (): void => {
     if (
@@ -24,16 +31,23 @@ const AddMahasiswa: React.FC<Props> = () => {
       totalCreditRef.current !== null
     ) {
       setMahasiswas((prev) => {
-        const newPosts: Mahasiswa[] = [...prev];
-        newPosts.push({
+        const newMahasiswas = [...prev];
+        newMahasiswas.push({
           firstName: firstNameRef.current?.value,
           lastName: lastNameRef.current?.value,
           totalCredit: Number(totalCreditRef.current?.value),
         });
-        return newPosts;
+
+        return newMahasiswas;
       });
     }
   };
+
+  useEffect(() => {
+    if (!isMount) {
+      navigate('/dashboard', { state: { mahasiswas: mahasiswas } });
+    }
+  }, [mahasiswas]);
 
   return (
     <Container className='d-flex justify-content-center'>
@@ -83,6 +97,6 @@ const AddMahasiswa: React.FC<Props> = () => {
       </div>
     </Container>
   );
-}
+};
 
-export default App;
+export default AddMahasiswa;
