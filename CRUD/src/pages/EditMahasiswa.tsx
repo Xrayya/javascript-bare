@@ -3,7 +3,7 @@ import { Button, Card, Container, Form, Row } from 'react-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useIsMount } from '../hooks/customHooks';
 
-const AddMahasiswa = () => {
+const EditMahasiswa = () => {
   interface Mahasiswa {
     firstName: string | undefined;
     lastName: string | undefined;
@@ -24,7 +24,9 @@ const AddMahasiswa = () => {
 
   const isMount = useIsMount();
 
-  const handleAddMahasiswas = (): void => {
+  const index: number = location.state.index;
+
+  const handleEditMahasiswas = (): void => {
     if (
       firstNameRef.current !== null &&
       lastNameRef.current !== null &&
@@ -32,11 +34,11 @@ const AddMahasiswa = () => {
     ) {
       setMahasiswas((prev) => {
         const newMahasiswas = [...prev];
-        newMahasiswas.push({
-          firstName: firstNameRef.current?.value,
-          lastName: lastNameRef.current?.value,
-          totalCredit: Number(totalCreditRef.current?.value),
-        });
+        newMahasiswas[index].firstName = firstNameRef.current?.value;
+        newMahasiswas[index].lastName = lastNameRef.current?.value;
+        newMahasiswas[index].totalCredit = Number(
+          totalCreditRef.current?.value
+        );
 
         return newMahasiswas;
       });
@@ -65,6 +67,7 @@ const AddMahasiswa = () => {
                 <Form.Control
                   type='text'
                   placeholder='e.g. Bambang'
+                  defaultValue={mahasiswas[index].firstName}
                   ref={firstNameRef}
                 />
               </Form.Group>
@@ -73,6 +76,7 @@ const AddMahasiswa = () => {
                 <Form.Control
                   type='text'
                   placeholder='e.g. Subandi'
+                  defaultValue={mahasiswas[index].lastName}
                   ref={lastNameRef}
                 />
               </Form.Group>
@@ -81,15 +85,16 @@ const AddMahasiswa = () => {
                 <Form.Control
                   type='number'
                   placeholder='e.g. 33'
+                  defaultValue={mahasiswas[index].totalCredit}
                   ref={totalCreditRef}
                 />
               </Form.Group>
               <Button
                 variant='primary'
                 type='button'
-                onClick={handleAddMahasiswas}
+                onClick={handleEditMahasiswas}
               >
-                Add
+                Edit
               </Button>
             </Form>
           </Card.Body>
@@ -99,4 +104,4 @@ const AddMahasiswa = () => {
   );
 };
 
-export default AddMahasiswa;
+export default EditMahasiswa;

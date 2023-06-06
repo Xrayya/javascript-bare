@@ -1,11 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 type Props = {
   number: number;
   firstName?: string;
   lastName?: string;
   totalCredit?: number;
+  onDelete: (e: number) => void;
+  onEdit: (e: number) => void;
+  onShow: (e: number) => void;
 };
 
 const MahasiswaRow: React.FC<Props> = ({
@@ -13,21 +15,38 @@ const MahasiswaRow: React.FC<Props> = ({
   firstName,
   lastName,
   totalCredit,
+  onDelete,
+  onEdit,
+  onShow,
 }) => {
+  const handleShow = () => {
+    onShow(number - 1);
+  };
+
+  const handleEdit = () => {
+    onEdit(number - 1);
+  };
+
+  const handleDelete = () => {
+    onDelete(number - 1);
+  };
+
   return (
-    <tr>
+    <tr className="align-middle">
       <th scope='row'>{number}</th>
       <td>{firstName}</td>
       <td>{lastName}</td>
       <td>{totalCredit}</td>
       <td className='d-flex gap-2'>
-        <Link to='detail-mahasiswa' className='btn btn-primary'>
+        <button className='btn btn-primary' onClick={handleShow}>
           Show
-        </Link>
-        <Link to='edit-mahasiswa' className='btn btn-primary'>
+        </button>
+        <button className='btn btn-primary' onClick={handleEdit}>
           Edit
-        </Link>
-        <button className='btn btn-primary'>Delete</button>
+        </button>
+        <button className='btn btn-primary' onClick={handleDelete}>
+          Delete
+        </button>
       </td>
     </tr>
   );

@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Container from 'react-bootstrap/esm/Container';
 import Row from 'react-bootstrap/esm/Row';
 import Table from 'react-bootstrap/esm/Table';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import MahasiswaRow from '../components/MahasiswaRow';
 
 const Dashboard = () => {
@@ -12,22 +12,29 @@ const Dashboard = () => {
     totalCredit: number | undefined;
   }
 
-  const [mahasiswas, setMahasiswas] = useState<Mahasiswa[]>([]);
+  const navigate = useNavigate();
 
   const location = useLocation();
 
-  useEffect(() => {
-    console.log(location.state);
-    if (location.state?.mahasiswas) {
-      setMahasiswas(location.state?.mahasiswas);
-      // setMahasiswas((prev) => {
-      //   const newMahasiswas = [...prev];
-      //   newMahasiswas.push(location.state?.newMahasiswa);
-      //   // location.state.newMahasiswa = null;
-      //   return newMahasiswas;
-      // });
-    }
-  }, []);
+  const [mahasiswas, setMahasiswas] = useState<Mahasiswa[]>(
+    location.state?.mahasiswas ?? []
+  );
+
+  const handleOnShow = (index: number) => {};
+
+  const handleOnEdit = (index: number) => {
+    navigate('/edit-mahasiswa', {
+      state: { mahasiswas: mahasiswas, index: index },
+    });
+  };
+
+  const handleOnDelete = (index: number) => {
+    setMahasiswas((prev) => {
+      const newMahasiswas = [...prev];
+      newMahasiswas.splice(index, 1);
+      return newMahasiswas;
+    });
+  };
 
   return (
     <Container className='d-flex justify-content-center'>
@@ -63,6 +70,9 @@ const Dashboard = () => {
                     firstName={mahasiswa.firstName}
                     lastName={mahasiswa.lastName}
                     totalCredit={mahasiswa.totalCredit}
+                    onEdit={handleOnEdit}
+                    onShow={handleOnShow}
+                    onDelete={handleOnDelete}
                   />
                 ))}
             </tbody>

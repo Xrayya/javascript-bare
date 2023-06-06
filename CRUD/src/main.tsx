@@ -8,6 +8,7 @@ import {
 } from 'react-router-dom';
 import Dashboard from './pages/Dashboard';
 import AddMahasiswa from './pages/AddMahasiswa';
+import EditMahasiswa from './pages/EditMahasiswa';
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
   {
     path: 'add-mahasiswa',
     element: <AddMahasiswa />,
+  },
+  {
+    path: 'edit-mahasiswa',
+    element: <EditMahasiswa />,
   },
 ]);
 
