@@ -40,11 +40,43 @@ const Dashboard = () => {
     });
   };
 
+  const handleClear = () => {
+    setMahasiswas([]);
+  };
+
+  const handleSave = () => {
+    const jsonData = JSON.stringify(mahasiswas);
+    localStorage.setItem('mahasiswaData', jsonData);
+  };
+
+  const handleLoad = () => {
+    const data = localStorage.getItem('mahasiswaData');
+    if (!data) {
+      alert('No data in localstorage');
+      return;
+    }
+
+    const jsonData = JSON.parse(data);
+    setMahasiswas(jsonData);
+  };
+
   return (
     <Container className='d-flex justify-content-center'>
       <div className='col-lg-8'>
         <Row>
           <h1 className='mt-2 text-center'>JS CRUD</h1>
+          <hr />
+          <div className='d-flex gap-2 mb-3'>
+            <button onClick={handleClear} className='btn btn-primary'>
+              Clear Data
+            </button>
+            <button onClick={handleSave} className='btn btn-primary'>
+              Save to local storage
+            </button>
+            <button onClick={handleLoad} className='btn btn-primary'>
+              Load from local storage
+            </button>
+          </div>
           <hr />
           <div>
             <Link
