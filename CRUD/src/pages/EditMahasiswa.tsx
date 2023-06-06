@@ -1,7 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
-import { Button, Card, Container, Form, Row } from 'react-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useIsMount } from '../hooks/customHooks';
+import Container from 'react-bootstrap/esm/Container';
+import Row from 'react-bootstrap/esm/Row';
+import Card from 'react-bootstrap/esm/Card';
+import Form from 'react-bootstrap/esm/Form';
+import Button from 'react-bootstrap/esm/Button';
 
 const EditMahasiswa = () => {
   interface Mahasiswa {

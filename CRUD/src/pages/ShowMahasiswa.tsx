@@ -1,6 +1,10 @@
 import { useRef, useState } from 'react';
-import { Button, Card, Container, Form, Row } from 'react-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
+import Container from 'react-bootstrap/esm/Container';
+import Row from 'react-bootstrap/esm/Row';
+import Card from 'react-bootstrap/esm/Card';
+import Form from 'react-bootstrap/esm/Form';
+import Button from 'react-bootstrap/esm/Button';
 
 const ShowMahasiswa = () => {
   interface Mahasiswa {
@@ -11,9 +15,7 @@ const ShowMahasiswa = () => {
 
   const location = useLocation();
 
-  const [mahasiswas] = useState<Mahasiswa[]>(
-    location.state?.mahasiswas ?? []
-  );
+  const [mahasiswas] = useState<Mahasiswa[]>(location.state?.mahasiswas ?? []);
 
   const firstNameRef = useRef<HTMLInputElement>(null);
   const lastNameRef = useRef<HTMLInputElement>(null);
@@ -24,7 +26,7 @@ const ShowMahasiswa = () => {
   const index: number = location.state.index;
 
   const handleBack = (): void => {
-    navigate('/dashboard', {state: {mahasiswas: mahasiswas}})
+    navigate('/dashboard', { state: { mahasiswas: mahasiswas } });
   };
 
   return (
@@ -68,11 +70,7 @@ const ShowMahasiswa = () => {
                   ref={totalCreditRef}
                 />
               </Form.Group>
-              <Button
-                variant='primary'
-                type='button'
-                onClick={handleBack}
-              >
+              <Button variant='primary' type='button' onClick={handleBack}>
                 Back
               </Button>
             </Form>
