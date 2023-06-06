@@ -1,9 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { Button, Card, Container, Form, Row } from 'react-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useIsMount } from '../hooks/customHooks';
 
-const EditMahasiswa = () => {
+const ShowMahasiswa = () => {
   interface Mahasiswa {
     firstName: string | undefined;
     lastName: string | undefined;
@@ -12,7 +11,7 @@ const EditMahasiswa = () => {
 
   const location = useLocation();
 
-  const [mahasiswas, setMahasiswas] = useState<Mahasiswa[]>(
+  const [mahasiswas] = useState<Mahasiswa[]>(
     location.state?.mahasiswas ?? []
   );
 
@@ -22,40 +21,17 @@ const EditMahasiswa = () => {
 
   const navigate = useNavigate();
 
-  const isMount = useIsMount();
-
   const index: number = location.state.index;
 
-  const handleEditMahasiswas = (): void => {
-    if (
-      firstNameRef.current !== null &&
-      lastNameRef.current !== null &&
-      totalCreditRef.current !== null
-    ) {
-      setMahasiswas((prev) => {
-        const newMahasiswas = [...prev];
-        newMahasiswas[index].firstName = firstNameRef.current?.value;
-        newMahasiswas[index].lastName = lastNameRef.current?.value;
-        newMahasiswas[index].totalCredit = Number(
-          totalCreditRef.current?.value
-        );
-
-        return newMahasiswas;
-      });
-    }
+  const handleBack = (): void => {
+    navigate('/dashboard', {state: {mahasiswas: mahasiswas}})
   };
-
-  useEffect(() => {
-    if (!isMount) {
-      navigate('/dashboard', { state: { mahasiswas: mahasiswas } });
-    }
-  }, [mahasiswas]);
 
   return (
     <Container className='d-flex justify-content-center'>
       <div className='col-lg-8'>
         <Row>
-          <h1 className='mt-2 text-center'>JS CRUD - Edit Mahasiswa</h1>
+          <h1 className='mt-2 text-center'>JS CRUD - Show Mahasiswa</h1>
           <hr />
         </Row>
         <Card className='mb-5'>
@@ -68,6 +44,7 @@ const EditMahasiswa = () => {
                   type='text'
                   placeholder='e.g. Bambang'
                   defaultValue={mahasiswas[index].firstName}
+                  disabled
                   ref={firstNameRef}
                 />
               </Form.Group>
@@ -77,6 +54,7 @@ const EditMahasiswa = () => {
                   type='text'
                   placeholder='e.g. Subandi'
                   defaultValue={mahasiswas[index].lastName}
+                  disabled
                   ref={lastNameRef}
                 />
               </Form.Group>
@@ -86,15 +64,16 @@ const EditMahasiswa = () => {
                   type='number'
                   placeholder='e.g. 33'
                   defaultValue={mahasiswas[index].totalCredit}
+                  disabled
                   ref={totalCreditRef}
                 />
               </Form.Group>
               <Button
                 variant='primary'
                 type='button'
-                onClick={handleEditMahasiswas}
+                onClick={handleBack}
               >
-                Edit
+                Back
               </Button>
             </Form>
           </Card.Body>
@@ -104,4 +83,4 @@ const EditMahasiswa = () => {
   );
 };
 
-export default EditMahasiswa;
+export default ShowMahasiswa;

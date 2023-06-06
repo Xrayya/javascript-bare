@@ -9,6 +9,7 @@ import {
 import Dashboard from './pages/Dashboard';
 import AddMahasiswa from './pages/AddMahasiswa';
 import EditMahasiswa from './pages/EditMahasiswa';
+import ShowMahasiswa from './pages/ShowMahasiswa';
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
   {
     path: 'edit-mahasiswa',
     element: <EditMahasiswa />,
+  },
+  {
+    path: 'show-mahasiswa',
+    element: <ShowMahasiswa />,
   },
 ]);
 

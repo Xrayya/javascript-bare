@@ -20,7 +20,11 @@ const Dashboard = () => {
     location.state?.mahasiswas ?? []
   );
 
-  const handleOnShow = (index: number) => {};
+  const handleOnShow = (index: number) => {
+    navigate('/show-mahasiswa', {
+      state: { mahasiswas: mahasiswas, index: index },
+    });
+  };
 
   const handleOnEdit = (index: number) => {
     navigate('/edit-mahasiswa', {
