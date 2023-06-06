@@ -1,0 +1,6 @@
+0000000000000000000000000000000000000000 f62a94da57c81c651e01c19b79b1b77703ced194 Xrayya <nur.alkhiyar@gmail.com> 1686053722 +0700	commit (initial): initial commit
+f62a94da57c81c651e01c19b79b1b77703ced194 16e0f0e48345757b4da053ce7d10b91ae12819b6 Xrayya <nur.alkhiyar@gmail.com> 1686054304 +0700	rebase (start): checkout 16e0f0e48345757b4da053ce7d10b91ae12819b6
+16e0f0e48345757b4da053ce7d10b91ae12819b6 16e0f0e48345757b4da053ce7d10b91ae12819b6 Xrayya <nur.alkhiyar@gmail.com> 1686054304 +0700	rebase (finish): returning to refs/heads/main
+16e0f0e48345757b4da053ce7d10b91ae12819b6 eeed3d4fd61f583ee3a87e289165915ddc2da395 Xrayya <nur.alkhiyar@gmail.com> 1686054500 +0700	commit: inital commit
+eeed3d4fd61f583ee3a87e289165915ddc2da395 f62a94da57c81c651e01c19b79b1b77703ced194 Xrayya <nur.alkhiyar@gmail.com> 1686054934 +0700	checkout: moving from main to f62a94d
+f62a94da57c81c651e01c19b79b1b77703ced194 eeed3d4fd61f583ee3a87e289165915ddc2da395 Xrayya <nur.alkhiyar@gmail.com> 1686054979 +0700	checkout: moving from f62a94da57c81c651e01c19b79b1b77703ced194 to main
